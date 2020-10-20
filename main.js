@@ -8,7 +8,16 @@
     // if appropriate crewMember is on board
 
 class Vehicle {
-
+  constructor(name, type, crew) {
+    this.name = name;
+    this.type = type;
+    this.crew = [];
+  }
+  ready() {
+    if (this.crew.length !== 0) {  // return true only if appropriate crew is on board
+      return true;
+    }
+  }
 }
 
 // 2 class that represents a crew member
@@ -20,6 +29,35 @@ class Vehicle {
     // cant be on two vehicles at once
 
 class CrewMember {
-  
+  constructor(name, job, vehicle) {
+    this.name = name;
+    this.job = job;
+    this.vehicle = vehicle;
+  }
+  board(v) {
+    if (this.vehicle === undefined) {
+      this.vehicle = v.type;
+      v.crew.push(this);
+    } else {
+      console.log(`Already on ${this.vehicle}!`);
+    }
+  }
 }
 
+// Classes usage
+
+const b1 = new Vehicle("B123","bus");
+const p1 = new Vehicle("P123","plane");
+const john = new CrewMember("John", "Driver");
+
+john.board(b1);
+console.log(john);
+john.board(p1);
+console.log(john);
+console.log(b1);
+
+if (b1.ready()) { //return true after board
+  console.log("All aboard!")
+} else {
+  console.log("We need more crew!");
+}
