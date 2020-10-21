@@ -8,7 +8,7 @@
     // if appropriate crewMember is on board
 
 class Vehicle {
-  constructor(name, type, crew) {
+  constructor(name, type) {
     this.name = name;
     this.type = type;
     this.crew = [];
