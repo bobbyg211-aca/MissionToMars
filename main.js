@@ -8,15 +8,21 @@
     // if appropriate crewMember is on board
 
 class Vehicle {
-  constructor(name, type) {
+  constructor(name, type, driver) {
     this.name = name;
     this.type = type;
+    this.driver = driver;
     this.crew = [];
   }
   ready() {
-    if (this.crew.length !== 0) {  // return true only if appropriate crew is on board
-      return true;
+    let status = false;
+    for (let i = 0; i < this.crew.length; i++) {
+      if (this.crew[i].job === this.driver) {
+        status = true;
+        break;
+      }
     }
+    return status;
   }
 }
 
@@ -24,15 +30,15 @@ class Vehicle {
 
 // they should have a name
 // they should have a title such as "pilot", "engineer", "captain", "driver"
-// they should have vehicle attribute, but calling the baord method should update it ot be the vehicl they are currently in
+// they should have vehicle attribute, but calling the board method should update it ot be the vehicle they are currently in
 // should include a method called board(vehicle); 
     // cant be on two vehicles at once
 
 class CrewMember {
-  constructor(name, job, vehicle) {
+  constructor(name, job) {
     this.name = name;
     this.job = job;
-    this.vehicle = vehicle;
+    this.vehicle;
   }
   board(v) {
     if (this.vehicle === undefined) {
@@ -46,18 +52,18 @@ class CrewMember {
 
 // Classes usage
 
-const b1 = new Vehicle("B123","bus");
-const p1 = new Vehicle("P123","plane");
-const john = new CrewMember("John", "Driver");
+const s1 = new Vehicle("S123","ship","captain");
+const jack = new CrewMember("Jack", "captain");
 
-john.board(b1);
-console.log(john);
-john.board(p1);
-console.log(john);
-console.log(b1);
+console.log(s1);
+console.log(jack);
 
-if (b1.ready()) { //return true after board
+jack.board(s1);
+
+console.log(s1);
+
+if (s1.ready()) { //return true after board
   console.log("All aboard!")
 } else {
-  console.log("We need more crew!");
+  console.log("We need the right driver!");
 }
